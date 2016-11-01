@@ -1,0 +1,33 @@
+{
+  "name": "bare-react-pwa",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=6.0"
+  },
+  "dependencies": {
+    "firebase": "^3.5.2",
+    "history": "2.1.1",
+    "react": "15.0.2",
+    "react-dom": "15.0.2",
+    "react-mdl": "^1.7.2",
+    "react-router": "^2.4.0",
+    "scroll-behavior": "^0.5.0"
+  },
+  "scripts": {
+    "start": "",
+    "build": "",
+    "test": ""
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-react-app": "^0.2.1",
+    "css-loader": "^0.25.0",
+    "file-loader": "0.9.0",
+    "json-loader": "0.5.4",
+    "postcss-loader": "0.13.0",
+    "style-loader": "0.13.1",
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-server": "^2.1.0-beta.9"
+  }
+}
