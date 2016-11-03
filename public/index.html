@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<title>PWA with React</title>
 	</head>
@@ -11,4 +11,13 @@
 		<div id="app"></div>
 	</body>
 	<script src="build/index.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('service-worker.js').then(function(reg) {
+					console.log('Registration succeeded. Scope is ' + reg.scope);
+				}).catch(function(error) {
+					console.log('Registration failed with ' + error);
+			});
+		}
+	</script>
 </html>
