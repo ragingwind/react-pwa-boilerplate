@@ -43,6 +43,7 @@ const webpackConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+			inject: true,
 			template: path.join(paths.public, 'index.html'),
 			favicon: path.join(paths.public, 'favicon.ico')
 		})
@@ -71,7 +72,6 @@ const serviceWorkerConfig = {
 		path.join(paths.build, '**/*')
 	],
 	maximumFileSizeToCacheInBytes: 4194304,
-	stripPrefix: paths.build,
 	runtimeCaching: [{
 		handler: 'cacheFirst',
 		urlPattern: /https?:\/\/fonts.+/
