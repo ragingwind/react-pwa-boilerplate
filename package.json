@@ -5,7 +5,6 @@
     "node": ">=6.0"
   },
   "dependencies": {
-    "firebase": "^3.5.2",
     "history": "2.1.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
@@ -14,8 +13,8 @@
     "scroll-behavior": "^0.5.0"
   },
   "scripts": {
-    "start": "",
-    "build": "",
+    "start": "node ./scripts/start.js",
+    "build": "rm -rf dist && node ./scripts/build.js",
     "test": ""
   },
   "devDependencies": {
@@ -24,9 +23,13 @@
     "babel-preset-react-app": "^0.2.1",
     "css-loader": "^0.25.0",
     "file-loader": "0.9.0",
+    "html-webpack-plugin": "^2.24.1",
     "json-loader": "0.5.4",
     "postcss-loader": "0.13.0",
     "style-loader": "0.13.1",
+    "sw-precache": "^4.2.1",
+    "sw-precache-webpack-plugin": "^0.5.1",
+    "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
   }
