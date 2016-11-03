@@ -5,9 +5,9 @@ import Router from 'react-router/lib/Router';
 import useRouterHistory from 'react-router/lib/useRouterHistory';
 import withScroll from 'scroll-behavior/lib/withStandardScroll';
 import routes from './Routes';
-import './index.css';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
+import './index.css';
 
 const history = withScroll(useRouterHistory(createHashHistory)())
 

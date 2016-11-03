@@ -11,7 +11,7 @@ class Contact extends React.Component {
 						This is the contact section
 					</CardText>
 					<CardActions border>
-						<Button colored>Get Started</Button>
+						<Button colored>get Touch</Button>
 					</CardActions>
 				</Card>
 			</div>

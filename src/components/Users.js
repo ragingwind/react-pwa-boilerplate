@@ -22,7 +22,7 @@ class User extends React.Component {
 		return (
 			<Card shadow={0} style={{width: '80%', margin: 'auto', marginTop: '30px'}}>
 				<CardTitle>User: {this.props.id}</CardTitle>
-				<CardText style={{fontSize: '30px'}}>
+				<CardText style={{fontSize: '1em'}}>
 					This is <Link style={{color:'rgba(0,0,0, 0.54)'}} to={`/users/${this.props.id}`}>{this.props.fullName}</Link> section
 				</CardText>
 			</Card>
@@ -42,21 +42,18 @@ class Users extends React.Component {
 	render() {
 		let users = {};
 
-		console.log('this.props.params.id', this.props.params.id);
 		if (this.props.params.id) {
 			users[this.props.params.id] = this.state.users[this.props.params.id];
 		} else {
 			users = this.state.users;;
 		}
-		
+
+		const children = Object.keys(users).map((u, i) => {
+			return <User key={`${u}-${i}`} id={u} {...users[u]}></User>;
+		});
+
 		return (
-			<div>
-			{
-				Object.keys(users).map((u, i) => {
-					return <User key={`${u}-${i}`} id={u} {...users[u]}></User>;
-				})
-			}
-			</div>
+			<div>{children}</div>
 		);
 	}
 }
