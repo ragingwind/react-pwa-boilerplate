@@ -2,6 +2,8 @@
 
 > Very simple version react application for Progressive Web App. Hope that it project can help many developers to understand that how to implement Progressive Web App with React.js
 
+<img src="https://cloud.githubusercontent.com/assets/124117/19998620/2e93071e-a2b1-11e6-9577-6fb3c108110e.png" align="center" width=320"/>
+
 ## WARNING
 
 This project is still in the incubation and not optimized fully yet. And many of features and codes could be significantly changed.
