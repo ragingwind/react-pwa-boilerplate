@@ -1,9 +1,12 @@
 import React from 'react';
 import Route from 'react-router/lib/Route';
+import IndexRoute from 'react-router/lib/IndexRoute';
 import App from './components/App';
+import Main from './components/Main';
 
 module.exports = <Route path="/" component={App}>
-  <Route path="users" getComponent={(s, cb) => {
+  <IndexRoute component={Main}/>
+	<Route path="users" getComponent={(s, cb) => {
     System.import('./components/Users').then((component) => {
       cb(null, component.default || component);
     });
