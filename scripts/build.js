@@ -7,7 +7,7 @@ process.env.NODE_ENV = 'production';
 function build() {
 	// Add addtitional packages
 	configs.webpack.plugins.push(new SWPrecacheWebpackPlugin(configs.serviceWorker));
-	
+
 	return new Promise((resolve, reject) => {
 		// Compile webpack and run dev server
 		const compiler = webpack(configs.webpack);

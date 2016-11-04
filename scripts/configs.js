@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const pkg = require('../package.json');
 
 process.env.NODE_ENV = 'development';
@@ -13,9 +14,10 @@ const paths = {
 };
 
 const webpackConfig = {
-	entry: [
-		path.join(paths.app, 'index.js')
-	],
+	entry: {
+		main: [path.join(paths.app, 'index.js')],
+		vendor: ['react', 'react-dom']
+	},
 	output: {
 		path: paths.build,
 		pathinfo: true,
@@ -28,7 +30,10 @@ const webpackConfig = {
 			include: paths.app,
 			loaders: 'babel',
 			query: {
-				presets: [require.resolve('babel-preset-react-app')],
+				presets: [
+					["es2015", { "loose": true, "modules": false }],
+					"react-app"
+				]
 			}
 		}, {
 			test: /\.css$/,
@@ -45,8 +50,21 @@ const webpackConfig = {
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: path.join(paths.public, 'index.html'),
-			favicon: path.join(paths.public, 'favicon.ico')
-		})
+			favicon: path.join(paths.public, 'favicon.ico'),
+			minify: {
+				removeComments: true,
+				collapseWhitespace: true,
+				removeRedundantAttributes: true,
+				useShortDoctype: true,
+				removeEmptyAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				keepClosingSlash: true,
+				minifyJS: true,
+				minifyCSS: true,
+				minifyURLs: true
+			}
+		}),
+		new CommonsChunkPlugin('commons.chunk.js')
 	]
 };
 
@@ -76,7 +94,7 @@ const serviceWorkerConfig = {
 		handler: 'cacheFirst',
 		urlPattern: /https?:\/\/fonts.+/
 	}],
-	verbose: false
+	logger: function (a) {}
 };
 
 module.exports = {

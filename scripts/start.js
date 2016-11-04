@@ -3,7 +3,6 @@ const crypto = require('crypto');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const swPrecache = require('sw-precache');
-
 const configs = require('./configs');
 
 process.env.NODE_ENV = 'production';
@@ -15,7 +14,9 @@ function hash(data) {
 }
 
 function precache(state) {
-	return swPrecache.generate(configs.sw).then(sw => {
+	// console.log('configs.sw', configs.serviceWorker);
+	configs.serviceWorker.staticFileGlobs = [];
+	return swPrecache.generate(configs.serviceWorker).then(sw => {
 		const caches = Object.keys(state.compilation.assets).map(v => {
 			return `[\'${v}\', \'${hash(v)}\']`;
 		});
@@ -46,10 +47,8 @@ function run(configs) {
 
 function start() {
 	// Add addtitional packages
-	configs.webpack.entry.unshift("webpack-dev-server/client?http://localhost:8080/");
-	configs.webpack.plugins = (configs.webpack.plugins || []).concat([
-		new webpack.HotModuleReplacementPlugin()
-	]);
+	configs.webpack.entry.main.unshift("webpack-dev-server/client?http://localhost:8080/");
+	configs.webpack.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 	// Compile webpack and run dev server
 	return run(configs).then(precache);
