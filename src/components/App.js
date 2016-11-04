@@ -1,11 +1,9 @@
 import React from 'react';
 import AppShell from './AppShell';
 
-import './App.css';
-
 class App extends React.Component {
 	handleSearchKeywordChanged(e) {
-
+		console.log('Search for', e.target.value);
 	}
 
 	render() {
