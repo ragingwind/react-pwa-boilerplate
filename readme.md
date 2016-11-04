@@ -45,10 +45,10 @@ yarn run build
 
 ```
 .
-├── build							: build files, it will be created after build
-├── public						: public / static files
-├── scripts						: config / build / start script
-├── src								: application source
+├── build: build files, it will be created after build
+├── public: public / static files
+├── scripts: config / build / start script
+├── src: application source
 ├── package.json
 ├── readme.md
 └── yarn.lock
