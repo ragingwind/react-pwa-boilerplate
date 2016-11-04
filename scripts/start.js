@@ -5,12 +5,12 @@ const WebpackDevServer = require('webpack-dev-server');
 const swPrecache = require('sw-precache');
 const configs = require('./configs');
 
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 process.env.PUBLIC_URL = 'pubic';
 
 function hash(data) {
 	const md5 = crypto.createHash('md5');
-	return md5.update(data).digest('hex');
+	return md5.update(data + Date.now()).digest('hex');
 }
 
 function precache(state) {
@@ -50,8 +50,20 @@ function start() {
 	configs.webpack.entry.main.unshift("webpack-dev-server/client?http://localhost:8080/");
 	configs.webpack.plugins.push(new webpack.HotModuleReplacementPlugin());
 
-	// Compile webpack and run dev server
-	return run(configs).then(precache);
+	// Enable service worker while app running on dev server
+	if (configs.webpackDevServer.serviceWorker) {
+		configs.webpackDevServer.setup = function(app) {
+			app.get('/service-worker.js', (req, res) => {
+				res.status(200)
+					 .set('Content-Type', 'application/javascript')
+					 .send(this.serviceWorker);
+			});
+		}
+
+		return run(configs).then(precache);
+	}
+
+	return run(configs);
 }
 
 start().then(_ => {

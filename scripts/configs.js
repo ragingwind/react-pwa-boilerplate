@@ -73,14 +73,7 @@ const webpackDevServerConfig = {
 	inline: true,
 	host: process.env.HOST,
 	port: process.env.PORT,
-	serviceWorker: '',
-	setup: function(app) {
-		app.get('/service-worker.js', (req, res) => {
-			res.status(200)
-				 .set('Content-Type', 'application/javascript')
-				 .send(this.serviceWorker);
-		});
-	}
+	serviceWorker: false
 };
 
 const serviceWorkerConfig = {
