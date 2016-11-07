@@ -8,6 +8,7 @@ import routes from './Routes';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import './index.css';
+import './theme.css';
 
 const history = withScroll(useRouterHistory(createHashHistory)())
 
