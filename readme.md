@@ -38,7 +38,11 @@ yarn install
 Test with Webpack Dev Server and also you can test with server worker on the server if you set `true` to `webpackDevServerConfig.serviceWorker` in `scripts/config.js`
 
 ```
+// dev server start without service worker
 yarn start
+
+// dev server start with service worker
+yarn start -- --sw
 ```
 
 ### Build

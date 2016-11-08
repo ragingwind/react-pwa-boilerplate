@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const swPrecache = require('sw-precache');
 const configs = require('./configs');
+const argv = require('minimist')(process.argv.slice(2));
 
 process.env.NODE_ENV = 'development';
 process.env.PUBLIC_URL = 'pubic';
@@ -14,7 +15,6 @@ function hash(data) {
 }
 
 function precache(state) {
-	// console.log('configs.sw', configs.serviceWorker);
 	configs.serviceWorker.staticFileGlobs = [];
 	return swPrecache.generate(configs.serviceWorker).then(sw => {
 		const caches = Object.keys(state.compilation.assets).map(v => {
@@ -51,12 +51,16 @@ function start() {
 	configs.webpack.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 	// Enable service worker while app running on dev server
-	if (configs.webpackDevServer.serviceWorker) {
+	if (argv.sw) {
+		// Add service worker register script into html
+		configs.webpack.entry.sw = [path.join(configs.paths.app, 'sw-register.js')];
+
+		// Add responder for service worker
 		configs.webpackDevServer.setup = function(app) {
 			app.get('/service-worker.js', (req, res) => {
 				res.status(200)
-					 .set('Content-Type', 'application/javascript')
-					 .send(this.serviceWorker);
+					.set('Content-Type', 'application/javascript')
+					.send(this.serviceWorker);
 			});
 		}
 

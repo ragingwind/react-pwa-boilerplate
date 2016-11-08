@@ -73,7 +73,7 @@ const webpackDevServerConfig = {
 	inline: true,
 	host: process.env.HOST,
 	port: process.env.PORT,
-	serviceWorker: false
+	serviceWorker: ''
 };
 
 const serviceWorkerConfig = {
