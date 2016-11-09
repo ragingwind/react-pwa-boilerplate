@@ -2,3 +2,8 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* patch to fix invalid position of content layout */
+.mdl-layout {
+	position: absolute !important;
+}
