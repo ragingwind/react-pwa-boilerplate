@@ -51,6 +51,14 @@ yarn start -- --sw
 yarn run build
 ```
 
+### Test
+
+We are mainly using [ava](https://github.com/avajs/ava) and [enzyme](https://github.com/airbnb/enzyme) to test our React components. Please visit to each sites for understanding how to use it. /cc [jsdom](https://github.com/tmpvar/jsdom)
+
+```
+yarn test
+```
+
 ## Project structure
 
 ```

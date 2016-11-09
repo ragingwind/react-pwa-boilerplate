@@ -6,7 +6,6 @@ const swPrecache = require('sw-precache');
 const configs = require('./configs');
 const argv = require('minimist')(process.argv.slice(2));
 
-process.env.NODE_ENV = 'development';
 process.env.PUBLIC_URL = 'pubic';
 
 function hash(data) {

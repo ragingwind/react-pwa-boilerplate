@@ -42,7 +42,7 @@ class Users extends React.Component {
 	render() {
 		let users = {};
 
-		if (this.props.params.id) {
+		if (this.props.params && this.props.params.id) {
 			users[this.props.params.id] = this.state.users[this.props.params.id];
 		} else {
 			users = this.state.users;;

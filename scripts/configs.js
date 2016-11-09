@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const pkg = require('../package.json');
 
-process.env.NODE_ENV = 'development';
 process.env.HOST = 'localhost';
 process.env.PORT = 8080;
 
@@ -28,13 +27,7 @@ const webpackConfig = {
 		loaders: [{
 			test: /\.(js|jax)$/,
 			include: paths.app,
-			loaders: 'babel',
-			query: {
-				presets: [
-					["es2015", { "loose": true, "modules": false }],
-					"react-app"
-				]
-			}
+			loaders: 'babel'
 		}, {
 			test: /\.css$/,
 			loader: 'style!css!postcss'

@@ -2,8 +2,6 @@ const webpack = require('webpack');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const configs = require('./configs');
 
-process.env.NODE_ENV = 'production';
-
 function build() {
 	// Add addtitional packages
 	configs.webpack.plugins.push(new SWPrecacheWebpackPlugin(configs.serviceWorker));
