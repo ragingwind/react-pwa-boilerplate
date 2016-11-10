@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const pkg = require('../package.json');
 
 process.env.HOST = 'localhost';
@@ -26,6 +27,11 @@ const webpackConfig = {
 	module: {
 		loaders: [{
 			test: /\.(js|jax)$/,
+			enforce:'pre',
+			loader: 'xo-loader',
+			exclude: /node_modules/
+		}, {
+			test: /\.(js|jax)$/,
 			include: paths.app,
 			loaders: 'babel'
 		}, {
@@ -40,6 +46,21 @@ const webpackConfig = {
 		}]
 	},
 	plugins: [
+		new LoaderOptionsPlugin({
+			options: {
+				xo: {
+					envs: ["browser"],
+					extends: ["xo", "xo-react"],
+					rules: {
+						"quote-props": ["error", "as-needed"],
+						'react/require-optimization': 0,
+						"react/forbid-component-props": 0,
+						"import/no-unresolved": 0, // temporary block errors
+						"import/no-unassigned-import": 0
+					}
+				}
+			}
+		}),
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: path.join(paths.public, 'index.html'),

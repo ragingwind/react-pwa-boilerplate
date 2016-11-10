@@ -1,6 +1,10 @@
 const webpack = require('webpack');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const configs = require('./configs');
+const statsOptions = {
+	chunks: false,
+	colors: true
+};
 
 function build() {
 	// Add addtitional packages
@@ -8,18 +12,20 @@ function build() {
 
 	return new Promise((resolve, reject) => {
 		// Compile webpack and run dev server
+		configs.webpack.stats = 'verbose';
 		const compiler = webpack(configs.webpack);
-		compiler.run(err => {
+		compiler.run((err, stats) => {
 			if (err) {
-				console.log('Have got an err', err);
-				throw new Error(err);
+				throw err;
 			}
 
-			resolve();
+			resolve(stats);
 		});
 	});
 }
 
-build().then(_ => {
-	console.log('Build has been done');
+build().then(stats => {
+	console.log(stats.toString(statsOptions));
+}).catch(e => {
+	console.log(e);
 });

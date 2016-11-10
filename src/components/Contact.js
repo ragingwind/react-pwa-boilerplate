@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardTitle, CardText, CardActions, CardMenu, Button, IconButton} from 'react-mdl';
+import {Card, CardTitle, CardText, CardActions, Button} from 'react-mdl';
 
 class Contact extends React.Component {
 	render() {
