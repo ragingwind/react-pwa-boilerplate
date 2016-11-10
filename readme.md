@@ -47,6 +47,8 @@ yarn start -- --sw
 
 ### Build
 
+This application will be built taking advanges from [xo](https://github.com/sindresorhus/xo), eslint, [Webpack2](https://webpack.js.org/)
+
 ```
 yarn run build
 ```
