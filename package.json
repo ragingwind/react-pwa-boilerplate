@@ -15,7 +15,8 @@
   "scripts": {
     "start": "NODE_ENV=development node ./scripts/start.js",
     "build": "rm -rf build && NODE_ENV=production node ./scripts/build.js",
-    "test": "NODE_ENV=test ava --verbose --serial"
+    "test": "xo && NODE_ENV=test ava --verbose --serial",
+    "lint": "xo"
   },
   "devDependencies": {
     "ava": "^0.16.0",
@@ -41,16 +42,23 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9",
-    "xo": "^0.17.0",
-    "xo-loader": "^0.7.0"
+    "xo": "^0.17.0"
+  },
+  "xo": {
+    "envs": ["browser"],
+    "extends": ["xo", "xo-react"],
+    "rules": {
+      "quote-props": ["error", "as-needed"],
+      "react/require-optimization": 0,
+      "react/forbid-component-props": 0,
+      "import/no-unresolved": 0,
+      "import/no-unassigned-import": 0,
+      "unicorn/filename-case": 0
+    }
   },
   "ava": {
-    "files": [
-      "test/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
+    "files": ["test/*.js"],
+    "require": ["babel-register"],
     "babel": "inherit"
   }
 }

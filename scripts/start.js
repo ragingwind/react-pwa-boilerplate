@@ -3,8 +3,8 @@ const crypto = require('crypto');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const swPrecache = require('sw-precache');
-const configs = require('./configs');
 const argv = require('minimist')(process.argv.slice(2));
+const configs = require('./configs');
 
 process.env.PUBLIC_URL = 'pubic';
 
@@ -17,15 +17,16 @@ function precache(state) {
 	configs.serviceWorker.staticFileGlobs = [];
 	return swPrecache.generate(configs.serviceWorker).then(sw => {
 		const caches = Object.keys(state.compilation.assets).map(v => {
-			return `[\'${v}\', \'${hash(v)}\']`;
+			return `['${v}', '${hash(v)}']`;
 		});
 
 		const timestamp = `// Manipulated for WebpackDevServer at ${new Date()}\n`;
-		configs.webpackDevServer.serviceWorker = sw.replace(/var precacheConfig = \[.*\];\n/,
-				`${timestamp}var precacheConfig = [${caches.join(', ')}]\n`);
+		const re = new RegExp('var precacheConfig = \\[.*\\];', 'gi');
+		const precache = `${timestamp}var precacheConfig = [${caches.join(', ')}]\n`;
+		configs.webpackDevServer.serviceWorker = sw.replace(re, precache);
 
 		return configs;
- });
+	});
 }
 
 function run(configs) {
@@ -36,7 +37,7 @@ function run(configs) {
 		compiler.plugin('done', resolve);
 		compiler.plugin('failed', reject);
 
-		devServer.listen(configs.webpackDevServer.port, (err, res) => {
+		devServer.listen(configs.webpackDevServer.port, err => {
 			if (err) {
 				throw new Error(err);
 			}
@@ -46,7 +47,7 @@ function run(configs) {
 
 function start() {
 	// Add addtitional packages
-	configs.webpack.entry.main.unshift("webpack-dev-server/client?http://localhost:8080/");
+	configs.webpack.entry.main.unshift('webpack-dev-server/client?http://localhost:8080/');
 	configs.webpack.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 	// Enable service worker while app running on dev server
@@ -55,13 +56,13 @@ function start() {
 		configs.webpack.entry.sw = [path.join(configs.paths.app, 'sw-register.js')];
 
 		// Add responder for service worker
-		configs.webpackDevServer.setup = function(app) {
+		configs.webpackDevServer.setup = function (app) {
 			app.get('/service-worker.js', (req, res) => {
 				res.status(200)
 					.set('Content-Type', 'application/javascript')
 					.send(this.serviceWorker);
 			});
-		}
+		};
 
 		return run(configs).then(precache);
 	}
@@ -69,8 +70,8 @@ function start() {
 	return run(configs);
 }
 
-start().then(_ => {
+start().then(() => {
 	console.log(`Server has been started with port: ${configs.webpackDevServer.port}`);
-}).catch(e => {
-	console.log('Have got an error', e);
+}).catch(err => {
+	console.log('Have got an error', err);
 });

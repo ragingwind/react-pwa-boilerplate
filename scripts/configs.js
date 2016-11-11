@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+// const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const pkg = require('../package.json');
 
 process.env.HOST = 'localhost';
@@ -26,12 +26,7 @@ const webpackConfig = {
 	},
 	module: {
 		loaders: [{
-			test: /\.(js|jax)$/,
-			enforce:'pre',
-			loader: 'xo-loader',
-			exclude: /node_modules/
-		}, {
-			test: /\.(js|jax)$/,
+			test: /\.(js|jsx)$/,
 			include: paths.app,
 			loaders: 'babel'
 		}, {
@@ -42,25 +37,10 @@ const webpackConfig = {
 			loader: 'json'
 		}, {
 			test: /\.(ico|jpg|jpeg|png|gif)$/,
-			loader:'file-loader?name=[path][name].[ext]'
+			loader: 'file?name=[path][name].[ext]'
 		}]
 	},
 	plugins: [
-		new LoaderOptionsPlugin({
-			options: {
-				xo: {
-					envs: ["browser"],
-					extends: ["xo", "xo-react"],
-					rules: {
-						"quote-props": ["error", "as-needed"],
-						'react/require-optimization': 0,
-						"react/forbid-component-props": 0,
-						"import/no-unresolved": 0, // temporary block errors
-						"import/no-unassigned-import": 0
-					}
-				}
-			}
-		}),
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: path.join(paths.public, 'index.html'),
@@ -101,12 +81,12 @@ const serviceWorkerConfig = {
 		handler: 'cacheFirst',
 		urlPattern: /https?:\/\/fonts.+/
 	}],
-	logger: function (a) {}
+	logger: function () {}
 };
 
 module.exports = {
 	webpack: webpackConfig,
 	webpackDevServer: webpackDevServerConfig,
 	serviceWorker: serviceWorkerConfig,
-	paths: paths,
+	paths: paths
 };

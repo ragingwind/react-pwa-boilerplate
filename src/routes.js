@@ -16,7 +16,7 @@ function routeContact(s, cb) {
 	});
 }
 
-module.exports = (
+export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={Main}/>
 		<Route path="users" getComponent={routeUsers}/>
