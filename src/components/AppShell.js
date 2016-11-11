@@ -10,10 +10,15 @@ export default class AppShell extends React.Component {
 	}
 
 	componentDidMount() {
-		document.querySelector('.mdl-layout__drawer').addEventListener('click', function () {
-			document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
-			this.classList.remove('is-visible');
-		}, false);
+		const drawer = document.querySelector('.mdl-layout__drawer');
+
+		// check for avoiding while testing. test doesn't allow accessing real DOM
+		if (drawer) {
+			drawer.addEventListener('click', function () {
+				document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
+				this.classList.remove('is-visible');
+			}, false);
+		}
 	}
 
 	handleLinkClick(e) {
@@ -28,21 +33,23 @@ export default class AppShell extends React.Component {
 
 	render() {
 		return (
-			<Layout fixedHeader fixedDrawer>
-				<Header title={this.props.title || ''}>
-					<Textfield onChange={this.props.onChange} label="Search" expandable expandableIcon="search"/>
-				</Header>
-				<Drawer title="Menu">
-					<Navigation>
-						<Link to="/users" onClick={this.handleLinkClick}>Users</Link>
-						<Link to="/contact" onClick={this.handleLinkClick}>Contact</Link>
-						<Link href="https://github.com" target="_blank" onClick={this.handleLinkClick}>Github</Link>
-					</Navigation>
-				</Drawer>
-				<Content style={{paddingTop: '30px'}}>
-					{this.props.children}
-				</Content>
-			</Layout>
+			<div>
+				<Layout fixedHeader fixedDrawer>
+					<Header title={this.props.title || ''}>
+						<Textfield onChange={this.props.onChange} label="Search" expandable expandableIcon="search"/>
+					</Header>
+					<Drawer title="Menu">
+						<Navigation>
+							<Link to="/users" onClick={this.handleLinkClick}>Users</Link>
+							<Link to="/contact" onClick={this.handleLinkClick}>Contact</Link>
+							<Link href="https://github.com" target="_blank" onClick={this.handleLinkClick}>Github</Link>
+						</Navigation>
+					</Drawer>
+					<Content style={{paddingTop: '30px'}}>
+						{this.props.children}
+					</Content>
+				</Layout>
+			</div>
 		);
 	}
 }
