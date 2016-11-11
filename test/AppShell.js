@@ -1,6 +1,6 @@
 import test from 'ava'
 import React from 'react'
-import {mount, shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import './lib/with-dom';
 import AppShell from '../src/components/AppShell'
