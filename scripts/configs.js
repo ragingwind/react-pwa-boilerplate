@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-// const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const pkg = require('../package.json');
 
 process.env.HOST = 'localhost';
