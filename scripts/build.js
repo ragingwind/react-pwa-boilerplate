@@ -1,5 +1,7 @@
+const path = require('path');
 const webpack = require('webpack');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const configs = require('./configs');
 
 const statsOptions = {
@@ -10,6 +12,10 @@ const statsOptions = {
 function build() {
 	// Add addtitional packages
 	configs.webpack.plugins.push(new SWPrecacheWebpackPlugin(configs.serviceWorker));
+	configs.webpack.plugins.push(new CopyWebpackPlugin([
+		{context: configs.paths.public, from: '*.png'},
+		{from: path.join(configs.paths.public, 'manifest.json')}
+	]));
 
 	return new Promise(resolve => {
 		// Compile webpack and run dev server
