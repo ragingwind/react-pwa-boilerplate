@@ -5,12 +5,12 @@
     "node": ">=6.0"
   },
   "dependencies": {
-    "history": "4.5.1",
+    "history": "^3.0.0",
     "material-ui": "^0.16.7",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-router": "^3.0.2",
-    "scroll-behavior": "^0.9.2"
+    "react-tap-event-plugin": "^2.0.1"
   },
   "scripts": {
     "start": "NODE_ENV=development node ./scripts/start.js",

@@ -1,54 +1,60 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
-import {Layout, Header, Navigation, Content, Textfield, Drawer} from 'react-mdl';
+// import {Layout, Header, Navigation, Content, Textfield, Drawer} from 'react-mdl';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import ContentLink from 'material-ui/svg-icons/content/link';
 
 export default class AppShell extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.handleLinkClick = this.handleLinkClick.bind(this);
+		this.state = {
+			open: false,
+			title: props.title || 'PWA with React'
+		};
+
+		this.handleToggleDrawer = this.handleToggleDrawer.bind(this);
+		this.handleRequestChange = this.handleRequestChange.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 	}
 
-	componentDidMount() {
-		const drawer = document.querySelector('.mdl-layout__drawer');
-
-		// check for avoiding while testing. test doesn't allow accessing real DOM
-		if (drawer) {
-			drawer.addEventListener('click', function () {
-				document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
-				this.classList.remove('is-visible');
-			}, false);
-		}
+	handleToggleDrawer() {
+		this.setState({open: !this.state.open});
 	}
 
-	handleLinkClick(e) {
-		const link = e.currentTarget;
+	handleRequestChange(open) {
+		this.setState({open});
+	}
 
-		// open external url on a new tab
-		if (link.target === '_blank') {
-			e.preventDefault();
-			window.open(link.href);
-		}
+	handleClose(e) {
+		console.log(e.nativeEvent);
+		this.setState({open: false});
+		e.preventDefault();
 	}
 
 	render() {
 		return (
 			<div>
-				<Layout fixedHeader fixedDrawer>
-					<Header title={this.props.title || ''}>
-						<Textfield onChange={this.props.onChange} label="Search" expandable expandableIcon="search"/>
-					</Header>
-					<Drawer title="Menu">
-						<Navigation>
-							<Link to="/users" onClick={this.handleLinkClick}>Users</Link>
-							<Link to="/contact" onClick={this.handleLinkClick}>Contact</Link>
-							<Link href="https://github.com" target="_blank" onClick={this.handleLinkClick}>Github</Link>
-						</Navigation>
-					</Drawer>
-					<Content style={{paddingTop: '30px'}}>
-						{this.props.children}
-					</Content>
-				</Layout>
+				<Drawer
+					docked={false}
+					width={200}
+					open={this.state.open}
+					onRequestChange={this.handleRequestChange}
+					>
+					<MenuItem primaryText="Users" leftIcon={<ContentLink/>} containerElement={<Link to="/users"/>} onTouchTap={this.handleToggleDrawer}/>
+					<MenuItem primaryText="Contact" leftIcon={<ContentLink/>} containerElement={<Link to="/contact"/>} onTouchTap={this.handleToggleDrawer}/>
+					<MenuItem primaryText="Github" leftIcon={<ContentLink/>} target="_blank" href="https://github.com/" onTouchTap={this.handleToggleDrawer}/>
+				</Drawer>
+				<AppBar
+					title={this.state.title}
+					onLeftIconButtonTouchTap={this.handleToggleDrawer}
+					iconClassNameRight="muidocs-icon-navigation-expand-more"
+					/>
+				<div id="content" style={{width: '90%', margin: 'auto', marginTop: '30px'}}>
+					{this.props.children}
+				</div>
 			</div>
 		);
 	}
@@ -56,6 +62,5 @@ export default class AppShell extends React.Component {
 
 AppShell.propTypes = {
 	title: React.PropTypes.string,
-	children: React.PropTypes.node,
-	onChange: React.PropTypes.func
+	children: React.PropTypes.node
 };

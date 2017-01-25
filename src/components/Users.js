@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
-import {Card, CardTitle, CardText} from 'react-mdl';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 const dummyUsers = {
 	jimmy: {
@@ -20,8 +20,8 @@ const dummyUsers = {
 class User extends React.Component {
 	render() {
 		return (
-			<Card shadow={0} style={{width: '80%', margin: 'auto', marginTop: '30px'}}>
-				<CardTitle>User: {this.props.id}</CardTitle>
+			<Card style={{marginBottom: '0.4em'}}>
+				<CardHeader title={`User: ${this.props.id}`}/>
 				<CardText style={{fontSize: '1em'}}>
 					This is <Link style={{color: 'rgba(0,0,0, 0.54)'}} to={`/users/${this.props.id}`}>{this.props.fullName}</Link> section
 				</CardText>

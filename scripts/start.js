@@ -23,7 +23,7 @@ function precache(state) {
 		const timestamp = `// Manipulated for WebpackDevServer at ${new Date()}\n`;
 		const re = new RegExp('var precacheConfig = \\[.*\\];', 'gi');
 		const precache = `${timestamp}var precacheConfig = [${caches.join(', ')}]\n`;
-		configs.webpackDevServer.serviceWorker = sw.replace(re, precache);
+		configs.serviceWorker.precache = sw.replace(re, precache);
 
 		return configs;
 	});
@@ -57,10 +57,10 @@ function start() {
 
 		// Add responder for service worker
 		configs.webpackDevServer.setup = function (app) {
-			app.get('/service-worker.js', (req, res) => {
+			app.get(`/${configs.serviceWorker.filename}`, (req, res) => {
 				res.status(200)
 					.set('Content-Type', 'application/javascript')
-					.send(this.serviceWorker);
+					.send(configs.serviceWorker.precache);
 			});
 		};
 

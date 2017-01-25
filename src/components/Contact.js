@@ -1,20 +1,22 @@
 import React from 'react';
-import {Card, CardTitle, CardText, CardActions, Button} from 'react-mdl';
+import {Card, CardHeader, CardText, CardMedia, CardActions} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 class Contact extends React.Component {
 	render() {
 		return (
-			<div>
-				<Card shadow={0} style={{width: '80%', margin: 'auto'}}>
-					<CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>Contact</CardTitle>
-					<CardText>
-						This is the contact section
-					</CardText>
-					<CardActions border>
-						<Button colored>get Touch</Button>
-					</CardActions>
-				</Card>
-			</div>
+			<Card>
+				<CardHeader title="Contact"/>
+				<CardMedia>
+					<img src="http://www.getmdl.io/assets/demos/welcome_card.jpg" alt=""/>
+				</CardMedia>
+				<CardText>
+					This is the contact section
+				</CardText>
+				<CardActions>
+					<FlatButton label="Get Touch"/>
+				</CardActions>
+			</Card>
 		);
 	}
 }

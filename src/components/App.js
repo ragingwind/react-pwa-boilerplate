@@ -1,16 +1,16 @@
 import React from 'react';
+import {MuiThemeProvider, getMuiTheme} from 'material-ui/styles';
 import AppShell from './AppShell';
+import Theme from './Theme';
 
 class App extends React.Component {
-	handleSearchKeywordChanged(e) {
-		console.log('Search for', e.target.value);
-	}
-
 	render() {
 		return (
-			<AppShell title="PWA with React" onChange={this.handleSearchKeywordChanged}>
-				{this.props.children}
-			</AppShell>
+			<MuiThemeProvider muiTheme={getMuiTheme(Theme)}>
+				<AppShell title="PWA with React">
+					{this.props.children}
+				</AppShell>
+			</MuiThemeProvider>
 		);
 	}
 }

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Card, CardTitle, CardText} from 'react-mdl';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 class Main extends React.Component {
 	render() {
 		return (
 			<div>
-				<Card shadow={0} style={{width: '80%', margin: 'auto', marginTop: '30px'}}>
-					<CardTitle><h3>Welcome!</h3></CardTitle>
+				<Card>
+					<CardHeader><h3>Welcome!</h3></CardHeader>
 					<CardText style={{fontSize: '1em'}}>
 						You now have:
 						<ul>

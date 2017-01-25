@@ -1,10 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const {LoaderOptionsPlugin} = require('webpack');
 const pkg = require('../package.json');
-
-process.env.HOST = 'localhost';
-process.env.PORT = 8080;
 
 const paths = {
 	public: 'public',
@@ -27,13 +25,13 @@ const webpackConfig = {
 		loaders: [{
 			test: /\.(js|jsx)$/,
 			include: paths.app,
-			loaders: 'babel'
+			loaders: 'babel-loader'
 		}, {
 			test: /\.css$/,
-			loader: 'style!css!postcss'
+			loader: 'style-loader!css-loader!postcss-loader'
 		}, {
 			test: /\.json$/,
-			loader: 'json'
+			loader: 'json-loader'
 		}, {
 			test: /\.(ico|jpg|jpeg|png|gif)$/,
 			loader: 'file?name=[path][name].[ext]'
@@ -57,21 +55,25 @@ const webpackConfig = {
 				minifyURLs: true
 			}
 		}),
-		new CommonsChunkPlugin('commons.chunk.js')
+		new CommonsChunkPlugin('commons.chunk.js'),
+		new LoaderOptionsPlugin({
+			options: {
+				postcss: []
+			}
+		})
 	]
 };
 
 const webpackDevServerConfig = {
 	contentBase: 'public',
 	inline: true,
-	host: process.env.HOST,
-	port: process.env.PORT,
-	serviceWorker: ''
+	host: process.env.HOST || 'localhost',
+	port: Number.parseInt(process.env.PORT || 8080, 10)
 };
 
 const serviceWorkerConfig = {
 	cacheId: pkg.name,
-	filename: 'service-worker.js',
+	filename: 'sw.js',
 	staticFileGlobs: [
 		path.join(paths.build, '**/*')
 	],
