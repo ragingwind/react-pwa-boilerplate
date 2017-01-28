@@ -17,6 +17,9 @@ function build() {
 		{from: path.join(configs.paths.public, 'manifest.json')}
 	]));
 
+	// Add service worker register script into html
+	configs.webpack.entry.sw = [path.join(configs.paths.app, 'sw-register.js')];
+
 	return new Promise(resolve => {
 		// Compile webpack and run dev server
 		configs.webpack.stats = 'verbose';
