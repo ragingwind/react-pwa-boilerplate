@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const {LoaderOptionsPlugin} = require('webpack');
 const pkg = require('../package.json');
 
@@ -63,6 +65,15 @@ const webpackConfig = {
 		})
 	]
 };
+if (process.env.NODE_ENV === 'production') {
+	webpackConfig.plugins.push(new DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify('production')
+			}
+		})
+	);
+	webpackConfig.plugins.push(new UglifyJsPlugin());
+}
 
 const webpackDevServerConfig = {
 	contentBase: 'public',
