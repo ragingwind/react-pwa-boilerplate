@@ -73,7 +73,6 @@ const webpackDevServerConfig = {
 
 const serviceWorkerConfig = {
 	cacheId: pkg.name,
-	filename: 'sw.js',
 	staticFileGlobs: [
 		path.join(paths.build, '**/*')
 	],
@@ -82,7 +81,8 @@ const serviceWorkerConfig = {
 		handler: 'cacheFirst',
 		urlPattern: /https?:\/\/fonts.+/
 	}],
-	logger: function () {}
+	logger: function () {},
+	filename: '/sw.js'
 };
 
 module.exports = {
