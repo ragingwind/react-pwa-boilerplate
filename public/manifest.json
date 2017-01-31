@@ -1,6 +1,6 @@
 {
-	"name": "bare-react-pwa",
-	"short_name": "bare-react-pwa",
+	"name": "pwa-react-boilerplate",
+	"short_name": "pwa-react-boilerplate",
 	"icons": [
 		{
 			"src": "chrome-touch-icon-192x192.png",

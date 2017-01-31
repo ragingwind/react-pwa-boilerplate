@@ -1,4 +1,4 @@
-# bare-react-pwa
+# pwa-react-boilerplate
 
 > Very simple version react application for Progressive Web App. Hope that it project can help many developers to understand that how to implement Progressive Web App with React.js
 
