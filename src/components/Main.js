@@ -12,11 +12,10 @@ class Main extends React.Component {
 						<ul>
 							<li>Web Manifest</li>
 							<li>Service worker for caching and offline</li>
-							<li>Application Shell powered by <a href="https://react-mdl.github.io">react-mdl</a></li>
-							<li>Supporting PRPL pattern</li>
-							<li>Baked in ES2015, Optimized build and testing</li>
+							<li>Application Shell powered by <a href="https://material-ui.com">material-ui</a></li>
+							<li>Supporting PRPL pattern by webpack 2 code splitting</li>
+							<li>Baked in ES2015, Optimized build and testing by ava and xo</li>
 						</ul>
-						<b>Looking for more Web App layouts? Check <a href="https://react-mdl.github.io">react-mdl</a> layouts. You can <a href="https://react-mdl.github.io/react-mdl/components/layout/">preview</a> them live</b>
 					</CardText>
 				</Card>
 			</div>
