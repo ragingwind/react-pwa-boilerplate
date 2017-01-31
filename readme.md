@@ -4,10 +4,6 @@
 
 <img src="https://cloud.githubusercontent.com/assets/124117/22330270/bb6b2728-e408-11e6-9488-d041b317e1e4.png" align="center" width=180"/>
 
-## WARNING
-
-This project is still in the incubation and not optimized fully yet. And many of features and codes could be significantly changed.
-
 ## Goals
 
 - Build Modern Progressive Web App in strong background of performance
@@ -42,7 +38,7 @@ Test with Webpack Dev Server and also you can test with server worker on the ser
 yarn start
 
 // dev server start with service worker
-yarn start -- --sw
+yarn start:sw
 ```
 
 ### Build
@@ -67,10 +63,10 @@ yarn test
 .
 ├── build: build files, it will be created after build
 ├── public: public / static files
-├── scripts: config / build / start script
 ├── src: application source
 ├── package.json
 ├── readme.md
+├── webpack.config.js
 └── yarn.lock
 ```
 
