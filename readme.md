@@ -37,8 +37,8 @@ Test with Webpack Dev Server and also you can test with server worker on the ser
 // dev server start without service worker
 yarn start
 
-// dev server start with service worker
-yarn start:sw
+// dev server start with service worker by enabling webpack's env flag
+yarn start -- --env.sw
 ```
 
 ### Build
@@ -47,6 +47,13 @@ This application will be built taking advanges from [xo](https://github.com/sind
 
 ```
 yarn run build
+```
+### Deploy to github
+
+Deploy this app to github with prefix with `name` in package.json.
+
+```
+yarn run gh
 ```
 
 ### Test

@@ -1,6 +1,6 @@
 {
-  "name": "bare-react-pwa",
-  "version": "0.1.0",
+  "name": "pwa-react-boilerplate",
+  "version": "0.1.5",
   "engines": {
     "node": ">=6.0"
   },
@@ -13,10 +13,9 @@
     "react-tap-event-plugin": "^2.0.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server",
-    "start:sw": "NODE_ENV=development SW=TRUE webpack-dev-server",
-    "build": "rm -rf build && NODE_ENV=production webpack",
-    "deploy": "gh-pages -d build",
+    "start": "webpack-dev-server",
+    "build": "rm -rf build && webpack --env.prod --progress --profile",
+    "gh": "yarn run build -- --env.prefix $npm_package_name && gh-pages -d build",
     "test": "xo && NODE_ENV=test ava --verbose --serial",
     "lint": "xo"
   },
