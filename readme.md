@@ -52,6 +52,8 @@ yarn run build
 
 Deploy this app to github with prefix with `name` in package.json.
 
+> You have to make sure that this app is running on secure options with https
+
 ```
 yarn run gh
 ```
