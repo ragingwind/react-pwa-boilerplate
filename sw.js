@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["/0.96189a90.js","d1c912ea01ab278bb3e59824772c8695"],["/1.96189a90.js","c09dd19ea595ea1cc3515bee31bda3e0"],["/chrome-splashscreen-icon-384x384.png","278e8e66828770445f154633ef833971"],["/chrome-touch-icon-192x192.png","93ab3cc2a5b9cd3b8869e35b3b0a3d79"],["/commons.chunk.js.96189a90.js","9c442158c94987136d320e87932ef2c1"],["/favicon.ico","fd73a6eb26a08ee46e7fd3cc34e7f6bf"],["/index.html","3b0f647fd8a95b2a082b80461e50f0c8"],["/main.96189a90.js","41913cbff1394f687f715d0bf88b9266"],["/manifest.json","b22331b3629e678420b9abe2c69500ac"],["/vendor.96189a90.js","5539bfd96e25be8e8d3661ed32847ac3"]];
+var precacheConfig = [["/bare-react-pwa/0.777ff50b.js","085b3834b742fd221d6a7933e685b49f"],["/bare-react-pwa/1.777ff50b.js","111e1cbd02b46546bc947bdb5fe658c5"],["/bare-react-pwa/commons.chunk.js.777ff50b.js","5925a12ce115c92e59c9246178ef1ebd"],["/bare-react-pwa/favicon.ico","fd73a6eb26a08ee46e7fd3cc34e7f6bf"],["/bare-react-pwa/index.html","042f9feb9d56288736029c8337c409e4"],["/bare-react-pwa/main.777ff50b.js","0b6fe60543e2e498d1a704194739d449"],["/bare-react-pwa/manifest.json","b22331b3629e678420b9abe2c69500ac"],["/bare-react-pwa/sw.777ff50b.js","efcffd410b3e0f3dfca53a2658c46abb"],["/bare-react-pwa/vendor.777ff50b.js","c9873ac3522dc86fb301af51484e38c1"]];
 var cacheName = 'sw-precache-v2-bare-react-pwa-' + (self.registration ? self.registration.scope : '');
 
 
@@ -134,7 +134,10 @@ self.addEventListener('install', function(event) {
           Array.from(urlsToCacheKeys.values()).map(function(cacheKey) {
             // If we don't have a key matching url in the cache already, add it.
             if (!cachedUrls.has(cacheKey)) {
-              return cache.add(new Request(cacheKey, {credentials: 'same-origin'}));
+              return cache.add(new Request(cacheKey, {
+                credentials: 'same-origin',
+                redirect: 'follow'
+              }));
             }
           })
         );
