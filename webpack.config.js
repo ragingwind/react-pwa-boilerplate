@@ -45,13 +45,7 @@ module.exports = ({prod = false, sw = false, prefix = ''} = {}) => {
 				loaders: 'babel-loader'
 			}, {
 				test: /\.css$/,
-				loader: 'style-loader!css-loader!postcss-loader'
-			}, {
-				test: /\.json$/,
-				loader: 'json-loader'
-			}, {
-				test: /\.(ico|jpg|jpeg|png|gif)$/,
-				loader: 'file?name=[path][name].[ext]'
+				loader: 'style-loader!css-loader'
 			}]
 		},
 		plugins: [
@@ -110,7 +104,7 @@ module.exports = ({prod = false, sw = false, prefix = ''} = {}) => {
 		webpackConfig.plugins.push(new SWPrecacheWebpackPlugin(serviceWorkerConfig));
 		webpackConfig.plugins.push(new CopyWebpackPlugin([{
 			context: './public',
-			from: '/*.png'
+			from: '*.png'
 		}, {
 			from: './public/manifest.json'
 		}]));
