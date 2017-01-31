@@ -64,12 +64,8 @@
     }
   },
   "ava": {
-    "files": [
-      "test/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
+    "files": "test/*.js",
+    "require": "babel-register",
     "babel": "inherit"
   }
 }
